@@ -1,1 +1,37 @@
+Skin Cancer Detection (CNN)
 
+A convolutional neural network for binary classification of skin lesion images as benign or malignant.
+
+## Dataset
+
+2,637 training images and 660 test images across two classes (Benign, Malignant), with data augmentation applied during training (shear, zoom, rotation, brightness, vertical flip).
+
+## Model
+
+A CNN built with Keras/TensorFlow:
+- 4 convolutional blocks (Conv2D + MaxPooling), with increasing filter depth (32 → 64 → 128 → 256)
+- Dropout layers for regularization
+- Batch normalization
+- Trained with early stopping on validation loss
+
+## Results
+
+Test accuracy: 82.6%
+
+This is a moderate result for a binary medical imaging task. It reflects a working end-to-end CNN pipeline (data loading, augmentation, training, evaluation, inference) rather than a clinically usable classifier. No precision/recall/F1 breakdown was captured for this run — for a medical classification task, false negatives (missing a malignant case) matter more than raw accuracy, so that breakdown would be a meaningful next step rather than an optional add-on.
+
+## Known Limitations & Next Steps
+
+- No precision/recall/F1 or confusion matrix currently reported — accuracy alone is not sufficient for a medical classification task
+- Transfer learning (VGG16/VGG19/Xception were imported but not used) would likely improve performance over a CNN trained from scratch on ~2.6K images
+- File paths in the notebook are hardcoded to a local machine and would need to be parameterized to run elsewhere
+
+## Requirements
+
+tensorflow / keras
+numpy
+pandas
+matplotlib
+seaborn
+pillow
+scikit-learn
