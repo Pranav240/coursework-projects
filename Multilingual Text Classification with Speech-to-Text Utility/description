@@ -1,0 +1,69 @@
+# Language Detection
+
+
+This project has two components: a speech-to-text transcription utility and a text-based language classifier. They are demonstrated separately in this notebook and are not currently integrated into a single end-to-end pipeline.
+
+
+## 1. Speech-to-Text Transcription
+
+
+A utility function that transcribes an audio file to text using Google's speech recognition API, trying multiple language models (German, French, Japanese, Hindi) in sequence until one successfully recognizes the speech.
+
+
+```python
+transcribe_audio("German.wav")
+```
+
+
+Returns the transcribed text and reports which language model matched.
+
+
+## 2. Text-Based Language Classification
+
+
+A supervised ML pipeline that classifies short text samples into one of three languages (German, French, Italian).
+
+
+Pipeline:
+- Data cleaning (symbol/number removal, lowercasing, URL stripping)
+- Feature extraction via Bag-of-Words CountVectorizer)
+- Label encoding
+- Train/test split (80/20)
+
+
+Models compared:
+
+| Model | Accuracy |
+|---|---|
+| K-Nearest Neighbors | 83.2% |
+| Random Forest | 97.9% |
+| Multinomial Naive Bayes | — |
+
+
+Random Forest was the best-performing model, with precision/recall/F1 all at or above 0.95 across all three language classes (see classification report in notebook).
+
+
+## Known Limitation
+
+
+The speech-to-text component and the text classifier are not currently connected — the classifier is trained and evaluated on pre-existing labeled text data Language Detection.csv), not on audio transcription output. Integrating them (transcribe audio → classify language of transcript) would be a natural next step.
+
+
+## Requirements
+
+
+```
+speechrecognition
+googletrans
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
+```
+
+
+## Dataset
+
+
+Language Detection.csv — filtered to German, French, and Italian samples for this classification task.
