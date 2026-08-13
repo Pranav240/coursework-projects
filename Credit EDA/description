@@ -1,1 +1,50 @@
+Credit Application EDA (Home Credit Default Risk)
 
+Exploratory data analysis on a loan application dataset (307,511 rows, 122 columns), covering data cleaning, missing value treatment, and univariate/bivariate/multivariate analysis of factors related to loan application outcomes.
+
+This is a pure EDA project — no predictive model is trained. The goal was to understand the data and surface patterns, not to build a classifier.
+
+## Workflow
+
+### 1. Data Quality & Missing Values
+
+- Dropped columns with more than 47% missing values
+- Imputed remaining missing values based on distribution shape and column type:
+  - Categorical columns with high missingness (e.g. OCCUPATION_TYPE, ~31% missing) imputed with an explicit "Others" category rather than a measure of central tendency, to avoid distorting the existing class distribution
+  - Numerical columns with no significant outliers and mean ≈ median (e.g. EXT_SOURCE_3) imputed with median
+  - Columns where 99%+ of values were a single value (e.g. AMT_REQ_CREDIT_BUREAU_*) imputed with mode
+
+### 2. Feature Engineering
+
+- Binned continuous variables (e.g. converting day-based columns to years) for more interpretable grouping
+
+### 3. Imbalance Check
+
+- Assessed class balance across NAME_CONTRACT_STATUS
+
+### 4. Univariate Analysis
+
+- Distribution plots across categorical and numerical columns
+
+### 5. Bivariate & Multivariate Analysis
+
+- Relationships explored include WEEKDAY_APPR_PROCESS_START vs AMT_APPLICATION, and AMT_ANNUITY vs AMT_GOODS_PRICE
+
+### 6. Correlation Analysis
+
+- Correlation among numerical columns computed separately for each loan status segment (Approved, Cancelled, Refused, Unused) — rather than one global correlation, to check whether relationships between variables differ by outcome
+
+### 7. Dataset Merge
+
+- Merged the application dataset with a previous-application dataset for extended analysis
+
+## Requirements
+
+pandas
+numpy
+matplotlib
+seaborn
+
+## Dataset
+
+application_data.csv (not included — Home Credit Default Risk–style loan application data).
